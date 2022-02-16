@@ -1,0 +1,106 @@
+{% extends 'index.html' %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Document</title> -->
+    {% block content %}
+</head>
+<body>
+<div class="container mt-5">
+<div class="profile-wrapper">
+    <div class="profile-section-user">  
+        <div class="profile-cover-img"><img src="https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg" alt=""></div>
+        <div class="profile-info-brief p-3"><img class="img-fluid user-profile-avatar" src="{{STATIC_ROOT}}{{ request.session.ProfilePic }}" alt="">
+            <div class="text-center">
+                <h5 class="text-uppercase mb-4">{{ request.session.FirstName }} {{ request.session.LastName }}</h5>
+                {% for u in udetails %}
+                <a href="{% url 'editData' pk=u.id %}"><i class="fa fa-edit">Edit Details</i></a>
+                {% endfor %}
+                <!-- <p class="text-muted fz-base">I'm John Doe a web developer and software engineer. I studied computer science and software engineering.</p> -->
+            </div>
+        </div>
+        <!-- /.profile-info-brief -->
+        <hr class="m-0">
+        <div class="hidden-sm-down">
+            <hr class="m-0">
+            <div class="profile-info-contact p-4">
+                <h6 class="mb-3">Contact Information</h6>
+                {% for u in udetails %}
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>EMAIL:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0">{{u.Email}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>PHONE:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0">{{u.Contact}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endfor %}
+            </div>
+            <!-- /.profile-info-general -->
+            <hr class="m-0">
+        </div>
+        <!-- /.hidden-sm-down -->
+    </div>
+    <!-- /.profile-section-user -->
+    <div class="profile-section-main">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs profile-tabs" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile-overview" role="tab">Timeline</a></li>
+        </ul>
+        <!-- /.nav-tabs -->
+        <!-- Tab panes -->
+        <div class="tab-content profile-tabs-content">
+            <div class="tab-pane active" id="profile-overview" role="tabpanel">
+                <div class="post-editor">
+                    <textarea name="post-field" id="post-field" class="post-field" placeholder="Write Something Cool!"></textarea>
+                    <div class="d-flex">
+                        <button class="btn btn-success px-4 py-1">Post</button>
+                    </div>
+                </div>
+                <!-- /.post-editor -->
+               
+                <div class="stream-posts">
+                    {% for p1 in pdetails %}
+                    <div class="stream-post">
+                    
+                        <div class="sp-author">                            
+                            <a href="" class="sp-author-avatar"><img src="{{STATIC_ROOT}}{{ request.session.ProfilePic }}" alt="userdp"></a>
+                            <h6 class="sp-author-name"><a href="#">{{request.session.FirstName}}</a></h6></div>
+                        
+                        <div class="sp-content">
+
+                            <div class="sp-info"><p class="h4">{{p1.pheading}}</p>{{p1.pdate}}</div>
+                            <p class="sp-paragraph mb-0">{{p1.ptext}}</p>
+                            <img class="img img-responsive card-img-top" src="{{STATIC_ROOT}}{{ p1.pimg.url }}" alt="post image">
+                        </div>
+                        
+                        
+                        <!-- /.sp-content -->
+                <!-- /.stream-posts -->
+                
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- /.tab-content -->
+    </div>
+    <!-- /.profile-section-main -->
+</div>
+</div>
+{% endblock %}
+</body>
+</html>
+
+<!-- https://bootdey.com/img/Content/avatar/avatar6.png -->

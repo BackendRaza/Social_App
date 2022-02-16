@@ -1,0 +1,19 @@
+
+{% extends 'index.html' %}
+{% block content %}
+    {% if key1 %}
+    <form action="{% url 'updateData' pk=key1.id %}" method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Update Record</h1>
+        <p>Id No.: {{key1.id}}</p>
+        <p>First Name: <input type="text" name="fname" id="fn" value="{{key1.FirstName}}"></p>
+        <p>Last Name: <input type="text" name="lname" id="ln" value="{{key1.LastName}}"></p>
+        <p>Email: <input type="email" name="umail" id="em" value="{{key1.Email}}"></p>
+        <p>Contact: <input type="tel" name="cont" id="cn" pattern="[0-9]{10}" value="{{key1.Contact}}"></p>
+        <p>Profile Pic: <input type="file" name="dp" id="dp" value="Picture"></p>
+        <p><input type="submit" value="Update"><input type="reset" value="Clear"></p>
+    </form>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

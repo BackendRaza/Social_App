@@ -1,0 +1,93 @@
+<!-- <nav class="mb-4 navbar navbar-expand-lg navbar-dark cyan">
+        <a class="navbar-brand font-bold m-auto" href="{% url 'home' %}">Django Crude App </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'newreg' %}"><i class="fa fa-envelope"></i> Register <span class="sr-only">(current)</span></a>
+                </li>
+                {% if request.session.FisrtName %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'showData' %}"><i class="fa fa-gear"></i> Users</a>
+                </li>
+            </ul>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="dp" src="{{MEDIA_ROOT}}{{ request.session.ProfilePic }}" alt="profile image"></a>
+                    <div class="dropdown-menu dropdown-cyan" aria-labelledby="navbarDropdownMenuLink-4">
+                        <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                    </div>
+                </div>
+                {% else %}
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-sm" href="{% url 'loginPage' %}">Login</a>
+                     <form class="form-inline" action="{% url 'loginPage' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="btn btn-primary" type="submit" value="Login">
+                    </form> -->
+                <!-- </li>
+                {% endif %}
+            
+        </div>
+    </nav> -->    
+
+
+    <!-- Main Container -->
+    <!-- <div class="container-fluid">
+    <h1 class="display-1 text-center">All Posts</h1>
+    <div class="container border border-light">
+    {% if post %}
+    {% for p in post %}
+      <div class="stream-posts">                    
+        <div class="stream-post">
+            <div class="sp-author">                            
+                <a href="" class="sp-author-avatar"><img src="{{STATIC_ROOT}}{{ p.userid.ProfilePic.url }}" alt="userdp"></a>
+                <h6 class="sp-author-name text-white">{{p.userid.FirstName}} {{p.userid.LastName}}</h6></div>            
+            <div class="sp-content">
+                <div class="sp-info"><p class="h4">{{p.pheading}}</p>{{p1.pdate}}</div>
+                <p class="sp-paragraph mb-0">{{p.ptext}}</p>
+                <img class="img img-responsive card-img-top" src="{{STATIC_ROOT}}{{ p.pimg.url }}" alt="post image">
+                <input type="checkbox" data-toggle="toggle" data-size="sm">
+                <p class="sp-paragraph mb-0 lead">Posted on {{p.pdate}}</p>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% endif %}
+    </div> -->
+
+    <!-- /.profile-info-contact -->
+            <!-- <hr class="m-0">
+            <div class="profile-info-general p-4">
+                <h6 class="mb-3">General Information</h6>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>JOB:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0">Web Developer</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>POSITION:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0">Team Manager</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>STUDIED:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0">Computer Science</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>LAST SEEN:</strong></td>
+                            <td>
+                                <p class="text-muted mb-0">Yesterday 8:00 AM</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->

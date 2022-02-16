@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css"> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static '/css/posts.css' %}">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+    <Script src="https://code.jquery.com/jquery-3.6.0.js"></Script>
+    <title>Home</title>
+    <style>
+        .dp
+        {
+            border-radius: 20%;
+            border: 1px solid black;
+            height: 40px;
+            width: 40px;
+        }
+        .postimg{
+            border-radius: 20%;
+            border: 1px solid black;
+            height: 100px;
+            width: 100px;
+        }
+        #scrollToTop{
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+        }
+    </style>
+    <style>
+        .bg-custom {
+      background: linear-gradient(to right, #3848A2, #007bff, #039BE6, #028BCF, #3F51B5);
+    }
+    
+    .bg-custom-1 {
+      background: linear-gradient(to right,  #007bff, #039BE6, #028BCF);
+    }
+      </style>
+      
+</head>
+<body>
+  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">Social App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainnav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>      
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="mainnav">
+          <ul class="navbar-nav">
+            {% if "FirstName" in request.session %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'createPost' %}">Create Post</a>
+            </li>
+            </ul>
+            <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+                <img class="dp img" src="{{STATIC_ROOT}}{{ request.session.ProfilePic }}" alt="profile image"></a>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="{% url 'profile' %}">View Profile</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>                
+              </div>
+            </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'newreg' %}">Register</a>
+              </li>
+            <li class="nav-item">
+                 <form class="form-inline" action="{% url 'loginPage' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </form>
+            </li>
+            </ul>
+            {% endif %}
+        </div>
+      </nav>
+    <!-- Navigation -->
+    {% block content %}
+    <div class="container-fluid">
+    <h1 class="display-1 text-center">All Posts</h1>
+    {% if post %}
+    {% for p in post %}
+    <div class="container bootstrap snippets bootdey">
+      <di class="col-md-8">
+          <div class="col-sm-12">
+              <div class="panel panel-white post panel-shadow">
+                <input type="hidden" name="postid" value="{{p.id}}">
+                  <div class="post-heading">
+                      <div class="pull-left image">
+                          <img src="{{STATIC_ROOT}}{{ p.userid.ProfilePic.url }}" class="img-circle avatar" alt="user profile image">
+                      </div>
+                      <div class="pull-left meta">
+                          <div class="title h5">
+                              <a href="#"><b>{{p.userid.FirstName}} {{p.userid.LastName}}</b></a>
+                              uploaded a photo.
+                          </div>
+                          <h6 class="text-muted time">Posted on {{p.pdate}}</h6>
+                      </div>
+                  </div>
+                  <div class="post-image">
+                      <img src="{{STATIC_ROOT}}{{ p.pimg.url }}" class="image" alt="image post">
+                  </div>
+                  <div class="post-description">
+                      <h4>{{p.pheading}}</h4>
+                      <p>{{p.ptext}}</p>
+                      <div class="stats">
+                        <p id="message"></p>
+                              <i id="like{{p.id}}" class="far fa-thumbs-up icon" data-catid="{{p.id}}" style="cursor:pointer;"></i>
+                          <a href="#" class="btn btn-default stat-item">
+                              <i class="fa fa-share icon"></i>128
+                          </a>
+                      </div>
+                  </div>
+                  <div class="post-footer">
+                      <div class="input-group"> 
+                          <input class="form-control" placeholder="Add a comment" type="text">
+                          <span class="input-group-addon">
+                              <a href="#"><i class="fa fa-edit"></i></a>  
+                          </span>
+                      </div>
+                      <ul class="comments-list">
+                          <li class="comment">
+                              <a class="pull-left" href="#">
+                                  <img class="avatar" src="https://bootdey.com/img/Content/user_3.jpg" alt="avatar">
+                              </a>
+                              <div class="comment-body">
+                                  <div class="comment-heading">
+                                      <h4 class="user">Full name 1</h4>
+                                      <h5 class="time">7 minutes ago</h5>
+                                  </div>
+                                  <p>This is a comment bla bla bla</p>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </di>
+  </div>
+  {% endfor %}
+    {% endif %}
+    <button onclick="topFunction()" type="button" class="btn btn-danger btn-floating btn-lg" id="scrollToTop">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    {% endblock %}
+    </div>
+    
+<!-- For Like Button -->
+<script>
+  $('.far').click(function(){
+            var catid;
+            catid = $(this).attr('data-catid')
+
+            $.ajax({
+                type:"GET",
+                url:"/like",
+                data:{
+                    post_id: catid
+                },
+                success: function(data){
+                    $('#like'+catid).css('color','blue')
+                    $('#message').text(data)
+                }
+            }
+            )
+        })
+</script>
+<!-- For Scroll Button -->
+<script>
+  //Get the button
+    var mybutton = document.getElementById("scrollToTop");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+</script>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+</body>
+</html>

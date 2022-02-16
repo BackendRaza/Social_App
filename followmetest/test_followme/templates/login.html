@@ -1,0 +1,40 @@
+{% extends 'index.html'%}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    {% block content%}
+    <title>Login</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body> 
+    
+    <p class="display-3 text-center">Login</p>
+    <form class="container w-50" method="POST" action="{% url 'loginUser' %}">
+        {% csrf_token %}
+        <p style="color: red;">{{msg}}</p>
+        <div class="form-group">
+          <label class="">Email</label>
+          <div class="">
+            <input  name="uemail" type="email" class="form-control" id="inputEmail3" placeholder="Email" required>
+          </div>
+        </div>
+        <div class="">
+          <label class="">Password</label>
+          <div class="">
+            <input name="upass" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </div>
+        </div>
+      </form>
+      {% endblock %}
+</body>
+</html>

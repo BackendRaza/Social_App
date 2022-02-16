@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+<body>
+    {% block content %}
+    <p class="display-2 text-center">Registeration Form</p>
+    <form class="container" action="{% url 'registered' %}" method="post" enctype="multipart/form-data" name="regform">
+        {% csrf_token %}        
+        <p style="color: red;">{{msg}}</p>
+        <div class="form-group">First Name: <input class="form-control" type="text" name="fname" id="fn" onblur="checkfname();"> <span id="error"></span></div>
+        <div class="form-group">Last Name: <input class="form-control" type="text" name="lname" id="ln"></div>
+        <div class="form-group">Email: <input class="form-control" type="email" name="umail" id="em"></div>
+        <div class="form-group">Contact: <input class="form-control" type="tel" name="cont" id="cn" pattern="[0-9]{10}"></div>
+        <div class="form-group">Password: <input class="form-control" type="password" name="pass" id="pass"></div>
+        <div class="form-group">Confirm Password: <input class="form-control" type="password" name="cpass" id="pass"></div>
+        <div class="form-group">Profile Pic: <input class="" type="file" name="dp" id="dp"></div>
+        <div class="form-group"><input class="btn btn-primary" type="submit" value="Submit"> <input class="btn btn-info" type="reset" value="Clear"></div>
+    </form>
+    {% endblock %}
+</body>
+</html>

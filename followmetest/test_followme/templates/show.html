@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+    {% block content %}
+    <div class="container mt-2">
+    <table class="table table-bordered text-center">
+        {% if key %}
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact</th>
+            <th>Profile Pic</th>
+            <th colspan="2">Update</th>
+          </tr>
+          {% for k in key %}
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{k.id}}</td>
+            <td>{{ k.FirstName }}</td>
+            <td>{{ k.LastName }}</td>
+            <td>{{ k.Email }}</td>
+            <td>{{ k.Contact }}</td>
+            <td><img class="img img-thumbnail" src="{{MEDIA_ROOT}}{{ k.imageURL }}" alt="profile pic" style="height: 50px; width: 50%;"></td>
+            <td>
+                <form name="editVal" action="{% url 'editData' pk=k.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-sm btn-info" type="submit" value="Edit">
+                </form>
+            </td>
+            <td>
+                <form name="deleteVal" action="{% url 'deleteData' pk=k.id %}" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-sm btn-danger" type="submit" value="Del">
+                </form>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+      </div>
+    {% endblock %}
+    <p><a href="{% url 'home' %}">Home Page</a></p>
+    <p><a href="{% url 'newreg' %}">Registration Form</a></p>
+</body>
+</html>
